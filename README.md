@@ -8,6 +8,10 @@ Sistema de chamados técnicos com um **Dashboard Administrativo** que consome um
 | **Disciplina** | Aplicativos Web — M2 |
 | **Professor** | Alessandro Aparecido da Silva Horas |
 
+**Entregáveis:**
+- 🎬 Vídeo de apresentação: [docs/THINDESK - Video.mp4](docs/THINDESK%20-%20Video.mp4)
+- 📄 Documentação (ABNT): [PDF](docs/Documentacao%20-%20Thindesk.pdf) · [Word](docs/Documentacao%20-%20Thindesk.docx)
+
 ---
 
 ## Sumário
