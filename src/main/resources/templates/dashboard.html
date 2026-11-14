@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard Administrativo - Thindesk</title>
         <script>
-            // Aplica o tema escuro do Bootstrap quando o sistema operacional estiver em modo escuro
             (function () {
                 var mq = window.matchMedia('(prefers-color-scheme: dark)');
                 var aplicar = function () { document.documentElement.setAttribute('data-bs-theme', mq.matches ? 'dark' : 'light'); };
@@ -28,7 +27,6 @@
         </div>
 
         <main class="dash flex-grow-1">
-            <!-- Cabeçalho -->
             <header class="dash-header">
                 <div>
                     <h1 class="dash-title">Dashboard administrativo</h1>
@@ -46,7 +44,6 @@
                 </div>
             </header>
 
-            <!-- RF05 - Filtros -->
             <form class="dash-filtros" id="formFiltros" autocomplete="off">
                 <div class="filtro">
                     <label for="fPeriodo">Período</label>
@@ -94,7 +91,6 @@
 
             <div id="alerta" class="alert alert-danger d-none" role="alert"></div>
 
-            <!-- RF01 - Indicadores gerais -->
             <section class="kpis" aria-label="Indicadores gerais">
                 <div class="kpi"><span class="kpi-label">Total de chamados</span><span class="kpi-valor" id="kTotal">–</span><span class="kpi-nota" id="kHoje"></span></div>
                 <div class="kpi"><span class="kpi-label">Pendentes</span><span class="kpi-valor" id="kPendentes">–</span><span class="kpi-nota" id="kPendDet"></span></div>
@@ -106,7 +102,6 @@
                 <div class="kpi kpi-alerta"><span class="kpi-label"><i class="bi bi-clock-history status-serio" aria-hidden="true"></i> Pendentes fora do SLA</span><span class="kpi-valor" id="kForaSla">–</span><span class="kpi-nota">prazo de atendimento estourado</span></div>
             </section>
 
-            <!-- RF02 - Chamados por período -->
             <section class="card-dash">
                 <div class="card-dash-header">
                     <div>
@@ -134,14 +129,12 @@
             </section>
 
             <div class="grade-2">
-                <!-- RF03 - Situação dos chamados -->
                 <section class="card-dash">
                     <div class="card-dash-header"><h2>Situação dos chamados</h2></div>
                     <div class="grafico"><canvas id="graficoStatus" role="img" aria-label="Gráfico de barras com a quantidade de chamados por situação"></canvas></div>
                     <div class="table-responsive"><table class="table table-sm mb-0"><thead><tr><th>Situação</th><th class="num">Qtd.</th><th class="num">%</th></tr></thead><tbody id="tabStatus"></tbody></table></div>
                 </section>
 
-                <!-- RF04 - Tipos mais atendidos -->
                 <section class="card-dash">
                     <div class="card-dash-header"><h2>Tipos de chamados mais atendidos</h2></div>
                     <div class="grafico"><canvas id="graficoTipos" role="img" aria-label="Ranking de tipos de chamado mais atendidos"></canvas></div>
@@ -150,13 +143,11 @@
             </div>
 
             <div class="grade-2">
-                <!-- Técnicos -->
                 <section class="card-dash">
                     <div class="card-dash-header"><h2>Atendimentos por técnico</h2></div>
                     <div class="table-responsive"><table class="table table-sm mb-0"><thead><tr><th>#</th><th>Técnico</th><th class="num">Atendidos</th><th class="num">Resolvidos</th><th class="num">Tempo médio</th></tr></thead><tbody id="tabTecnicos"></tbody></table></div>
                 </section>
 
-                <!-- Chamados recentes com considerações técnicas -->
                 <section class="card-dash">
                     <div class="card-dash-header">
                         <h2>Chamados recentes</h2>

@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-/**
- * Converte as exceções da API em respostas JSON padronizadas ({@link ErroResponse}).
- */
 @RestControllerAdvice(basePackages = "com.pfc.thindesk.controller.api")
 public class ApiExceptionHandler {
 
@@ -37,7 +34,6 @@ public class ApiExceptionHandler {
         return erro(HttpStatus.BAD_REQUEST, e.getMessage(), req, List.of());
     }
 
-    /** Erros de validação do corpo (@Valid) e de conversão dos parâmetros de filtro (ex.: data inválida). */
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErroResponse> validacao(BindException e, HttpServletRequest req) {
         List<String> detalhes = e.getFieldErrors().stream()

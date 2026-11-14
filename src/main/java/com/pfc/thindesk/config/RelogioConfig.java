@@ -5,7 +5,6 @@ import java.time.ZoneId;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** Relógio da aplicação injetável (permite fixar a data nos testes). */
 @Configuration
 public class RelogioConfig {
 

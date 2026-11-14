@@ -2,7 +2,6 @@ package com.pfc.thindesk.dto;
 
 import java.time.LocalDateTime;
 
-/** Indicadores gerais exibidos nos cards do dashboard (RF01). */
 public record IndicadoresResponse(
         long total,
         long pendentes,

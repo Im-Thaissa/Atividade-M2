@@ -20,10 +20,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * Popula a coleção "chamados" com dados de exemplo dos últimos 6 meses quando ela está vazia.
- * Ativado por thindesk.seed.enabled=true (padrão no perfil dev). Usa semente fixa para ser reprodutível.
- */
 @Component
 @Order(10)
 @ConditionalOnProperty(name = "thindesk.seed.enabled", havingValue = "true")
@@ -80,11 +76,9 @@ public class DadosExemploSeeder implements ApplicationRunner {
     static List<Chamado> gerar(int quantidade, LocalDateTime agora, Random rnd) {
         List<Chamado> lista = new ArrayList<>();
         for (int i = 0; i < quantidade; i++) {
-            // Mais chamados recentes do que antigos (volume crescente ao longo de ~6 meses).
             double r = Math.sqrt(rnd.nextDouble());
             long minutosAtras = (long) ((1 - r) * 180 * 24 * 60);
             LocalDateTime abertura = agora.minusMinutes(minutosAtras).truncatedTo(ChronoUnit.MINUTES);
-            // Chamados abertos fora do horário comercial são deslocados para o expediente.
             if (abertura.getHour() < 8 || abertura.getHour() > 18) {
                 abertura = abertura.withHour(8 + rnd.nextInt(10));
                 if (abertura.isAfter(agora)) {
@@ -105,7 +99,6 @@ public class DadosExemploSeeder implements ApplicationRunner {
             c.setPrioridade(prioridade.getRotulo());
             c.setDataAbertura(abertura);
 
-            // Tempo de resolução proporcional ao SLA, com parte dos chamados estourando o prazo.
             double fator = 0.15 + rnd.nextDouble() * (rnd.nextDouble() < 0.2 ? 2.5 : 0.95);
             long minutosResolucao = Math.max(20, (long) (prioridade.getSlaHoras() * 60 * fator));
             LocalDateTime fechamento = abertura.plusMinutes(minutosResolucao);

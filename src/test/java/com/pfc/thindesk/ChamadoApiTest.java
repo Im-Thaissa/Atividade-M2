@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 
-/** Testes de integração dos endpoints /api/chamados (RF06 e RF07). */
 class ChamadoApiTest extends TesteBase {
 
     @BeforeEach

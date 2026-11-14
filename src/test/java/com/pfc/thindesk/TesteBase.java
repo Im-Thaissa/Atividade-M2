@@ -15,10 +15,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-/**
- * Base dos testes de integração: sobe a aplicação com MongoDB embarcado (perfil "test")
- * e fixa o relógio em 14/11/2026 12:00 para que os indicadores sejam determinísticos.
- */
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")

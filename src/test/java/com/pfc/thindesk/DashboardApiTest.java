@@ -15,18 +15,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.test.context.support.WithMockUser;
 
-/**
- * Testes de integração dos endpoints /api/dashboard/** com uma massa de dados conhecida.
- *
- * Massa (relógio fixo em 14/11/2026 12:00):
- * 1. Hardware / João    / Alta    / Resolvido    10/11 09h -> 10/11 13h (4h, dentro do SLA)
- * 2. Hardware / Mariana / Média   / Resolvido    11/11 08h -> 12/11 14h (30h, fora do SLA)
- * 3. Software / João    / Baixa   / Aberto       14/11 09h (aberto hoje)
- * 4. Rede     / Carlos  / Crítica / Em andamento 13/11 08h (crítico pendente, fora do SLA)
- * 5. Software / Mariana / Média   / Cancelado    01/11 10h -> 01/11 11h
- * 6. Hardware / João    / Alta    / Aguardando   20/10 10h (fora do SLA)
- * 7. Registro legado: status "aberto" (minúsculo), sem tipo, técnico e datas
- */
 @WithMockUser
 class DashboardApiTest extends TesteBase {
 

@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Prioridade do chamado e o respectivo prazo de atendimento (SLA) em horas.
- */
 public enum Prioridade {
 
     BAIXA("Baixa", 72),
