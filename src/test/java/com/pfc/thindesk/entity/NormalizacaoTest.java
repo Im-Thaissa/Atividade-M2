@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-/** Testes unitários do tratamento/normalização de dados (RF07). */
 class NormalizacaoTest {
 
     @ParameterizedTest

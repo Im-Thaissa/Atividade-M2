@@ -19,17 +19,13 @@ public class Chamado {
     @Indexed
     private String tecnico;
     private String usuario;
-    /** Setor do cliente que abriu o chamado. */
     private String setor;
-    /** Rótulo da prioridade (Baixa, Média, Alta, Crítica). */
     private String prioridade;
-    /** Considerações técnicas registradas pelo técnico durante/após o atendimento. */
     private String consideracoesTecnicas;
     @Indexed
     private LocalDateTime dataAbertura;
     private LocalDateTime dataFechamento;
 
-    /** Tempo de resolução em horas, ou null se o chamado ainda não foi fechado. */
     @org.springframework.data.annotation.Transient
     public Double getTempoResolucaoHoras() {
         if (dataAbertura == null || dataFechamento == null) {

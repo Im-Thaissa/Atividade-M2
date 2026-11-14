@@ -19,22 +19,20 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/css/**", "/dist/**", "/plugins/**", "/js/**", "/images/**").permitAll() // Permitir acesso à página de login e arquivos estáticos
-                .anyRequest().authenticated() // Exigir autenticação para qualquer outra página
+                .requestMatchers("/login", "/css/**", "/dist/**", "/plugins/**", "/js/**", "/images/**").permitAll()
+                .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/login") // Definir a URL da página de login personalizada
-                .defaultSuccessUrl("/dashboard", true) // Redirecionar para o dashboard após login bem-sucedido
-                .permitAll() // Permitir que todos acessem a página de login
+                .loginPage("/login")
+                .defaultSuccessUrl("/dashboard", true)
+                .permitAll()
             )
-            // Autenticação HTTP Basic para consumo da API por outros sistemas (ex.: Postman, curl)
             .httpBasic(Customizer.withDefaults())
-            // Na API, requisições não autenticadas recebem 401 em vez de redirecionamento para o login
             .exceptionHandling(ex -> ex.defaultAuthenticationEntryPointFor(
                 new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED), new AntPathRequestMatcher("/api/**")))
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout") // Redirecionar para o login após logout
+                .logoutSuccessUrl("/login?logout")
             );
         return http.build();
     }

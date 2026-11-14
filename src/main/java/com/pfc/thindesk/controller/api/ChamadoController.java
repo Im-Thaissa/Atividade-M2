@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/** Endpoints REST de chamados: consulta (com filtros e paginação), criação e atualização. */
 @RestController
 @RequestMapping("/api/chamados")
 public class ChamadoController {
@@ -62,7 +61,6 @@ public class ChamadoController {
         return chamadoService.atualizarStatus(id, req.status(), req.consideracoesTecnicas());
     }
 
-    /** Mantido para o formulário HTML legado (chamados/atualizar.html). */
     @PostMapping("/atualizar/{id}")
     public ResponseEntity<Void> atualizarViaFormulario(@PathVariable String id, @ModelAttribute Chamado dados) {
         chamadoService.atualizarChamado(id, dados);
