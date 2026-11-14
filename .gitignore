@@ -3,3 +3,9 @@ local.properties
 .idea/
 *.iml
 .vscode/
+
+# Thindesk
+*.class
+nbproject/
+.env
+.claude/
