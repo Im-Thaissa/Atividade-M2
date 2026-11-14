@@ -7,7 +7,6 @@ Sistema de chamados técnicos com um **Dashboard Administrativo** que consome um
 | **Aluna** | Thaíssa Victória Bianchini de Oliveira — RGM 11231102992 |
 | **Disciplina** | Aplicativos Web — M2 |
 | **Professor** | Alessandro Aparecido da Silva Horas |
-| **Instituição** | UMC — Universidade de Mogi das Cruzes |
 
 ---
 
