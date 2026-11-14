@@ -5,7 +5,6 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-/** Corpo das requisições de criação e atualização de chamado. */
 public record ChamadoRequest(
         @NotBlank(message = "descricao é obrigatória")
         @Size(max = 500, message = "descricao deve ter no máximo 500 caracteres") String descricao,

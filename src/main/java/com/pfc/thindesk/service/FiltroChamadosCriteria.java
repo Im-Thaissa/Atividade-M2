@@ -9,10 +9,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.springframework.data.mongodb.core.query.Criteria;
 
-/**
- * Traduz os filtros recebidos pela API em um {@link Criteria} do MongoDB, validando e
- * normalizando os valores (ex.: "em_andamento" -> "Em andamento").
- */
 public final class FiltroChamadosCriteria {
 
     private FiltroChamadosCriteria() {

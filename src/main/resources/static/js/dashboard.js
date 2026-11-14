@@ -1,5 +1,3 @@
-// Dashboard Administrativo - Thindesk
-// Consome a API REST (/api/dashboard/** e /api/chamados) e renderiza indicadores, gráficos e tabelas.
 (function () {
     'use strict';
 
@@ -19,8 +17,6 @@
     const dataHora = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
 
     const estado = { pagina: 0, timer: null, graficos: {}, carregando: false };
-
-    // ------------------------------------------------------------ utilitários
 
     function cssVar(nome) {
         return getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
@@ -45,7 +41,6 @@
         return d.getFullYear() + '-' + m + '-' + dia;
     }
 
-    /** Chamada à API com tratamento de erros padronizado (RF06/RF07). */
     async function api(caminho, params) {
         const url = new URL(caminho, window.location.origin);
         Object.entries(params || {}).forEach(([k, v]) => {
@@ -69,8 +64,6 @@
         }
         return corpo;
     }
-
-    // ------------------------------------------------------------ filtros (RF05)
 
     function aplicarPeriodoPreset() {
         const preset = $('fPeriodo').value;
@@ -96,7 +89,6 @@
         return document.querySelector('input[name="agrupamento"]:checked').value;
     }
 
-    /** Mantém os filtros na URL para que a visão possa ser compartilhada. */
     function salvarNaUrl(f) {
         const p = new URLSearchParams();
         p.set('periodo', $('fPeriodo').value);
@@ -143,8 +135,6 @@
         valores.forEach((v) => select.add(new Option(v, v)));
         select.value = valores.includes(atual) ? atual : '';
     }
-
-    // ------------------------------------------------------------ renderização
 
     function renderIndicadores(k) {
         $('kTotal').textContent = numero.format(k.total);
@@ -281,8 +271,6 @@
         $('pagProxima').disabled = pagina.pagina + 1 >= totalPaginas;
     }
 
-    // ------------------------------------------------------------ carregamento (RF06/RF07)
-
     async function carregarRecentes(filtros) {
         const pagina = await api('/api/chamados', Object.assign({}, filtros, { pagina: estado.pagina, tamanho: TAMANHO_PAGINA }));
         renderRecentes(pagina);
@@ -328,8 +316,6 @@
             }, INTERVALO_ATUALIZACAO_MS);
         }
     }
-
-    // ------------------------------------------------------------ eventos
 
     function iniciar() {
         restaurarDaUrl();

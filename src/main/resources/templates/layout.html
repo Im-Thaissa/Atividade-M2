@@ -9,19 +9,16 @@
         <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
-        <!-- Botão para abrir/fechar a sidebar em telas pequenas -->
         <div class="toggle-btn btn btn-dark d-md-none">
             <span>&#9776;</span>
         </div>
 
-        <!-- Sidebar incluído como fragmento -->
         <aside>
             <div th:replace="~{fragments/sidebar :: sidebar}"></div>
         </aside>
 
-        <!-- Conteúdo Principal -->
         <main class="container-fluid mt-4">
-            <div th:replace="~{home :: content}"></div> <!-- Substitui o conteúdo dinamicamente -->
+            <div th:replace="~{home :: content}"></div>
         </main>
 
         <script th:src="@{/js/script.js}"></script>

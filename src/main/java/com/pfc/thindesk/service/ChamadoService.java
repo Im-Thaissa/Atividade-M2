@@ -35,12 +35,10 @@ public class ChamadoService {
         this.relogio = relogio;
     }
 
-    /** Lista todos os chamados (usado pela tela Thymeleaf existente). */
     public List<Chamado> listarChamados() {
         return chamadoRepository.findAll(Sort.by(Sort.Direction.DESC, "dataAbertura"));
     }
 
-    /** Consulta paginada e filtrada de chamados. */
     public PaginaResponse<Chamado> pesquisar(FiltroChamados filtro, int pagina, int tamanho, String ordenarPor, String direcao) {
         if (pagina < 0) {
             throw new RequisicaoInvalidaException("pagina deve ser maior ou igual a 0");
@@ -99,7 +97,6 @@ public class ChamadoService {
         return chamadoRepository.save(chamado);
     }
 
-    /** Altera apenas a situação (e opcionalmente as considerações técnicas) de um chamado. */
     public Chamado atualizarStatus(String id, String status, String consideracoesTecnicas) {
         Chamado chamado = buscarPorId(id);
         chamado.setStatus(FiltroChamadosCriteria.statusNormalizado(status));
@@ -110,7 +107,6 @@ public class ChamadoService {
         return chamadoRepository.save(chamado);
     }
 
-    /** Atualização vinda do formulário Thymeleaf legado. */
     public Chamado atualizarChamado(String id, Chamado dados) {
         Chamado chamado = buscarPorId(id);
         chamado.setDescricao(dados.getDescricao());
@@ -124,7 +120,6 @@ public class ChamadoService {
         return chamadoRepository.save(chamado);
     }
 
-    /** Normaliza e copia os dados da requisição para a entidade. */
     private void aplicar(Chamado chamado, ChamadoRequest req) {
         chamado.setDescricao(limpar(req.descricao()));
         chamado.setTipo(limpar(req.tipo()));
@@ -143,10 +138,6 @@ public class ChamadoService {
         }
     }
 
-    /**
-     * Regra de negócio: chamados finalizados (Resolvido/Cancelado) recebem data de fechamento;
-     * ao serem reabertos, a data de fechamento é removida.
-     */
     private void ajustarFechamento(Chamado chamado) {
         boolean finalizado = StatusChamado.de(chamado.getStatus()).map(StatusChamado::isFinalizado).orElse(false);
         if (finalizado && chamado.getDataFechamento() == null) {

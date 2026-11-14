@@ -35,11 +35,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-/**
- * Regras de negócio e consultas que alimentam o Dashboard Administrativo.
- * Agrupamentos (status, tipos, técnicos) são feitos no próprio MongoDB via Aggregation Framework;
- * indicadores e série temporal são calculados a partir da consulta filtrada.
- */
 @Service
 public class DashboardService {
 
@@ -56,8 +51,6 @@ public class DashboardService {
         this.mongoTemplate = mongoTemplate;
         this.relogio = relogio;
     }
-
-    // ------------------------------------------------------------------ RF01
 
     public IndicadoresResponse indicadores(FiltroChamados filtro) {
         List<Chamado> chamados = mongoTemplate.find(new Query(FiltroChamadosCriteria.montar(filtro)), Chamado.class, COLECAO);
@@ -119,8 +112,6 @@ public class DashboardService {
                 agora.truncatedTo(ChronoUnit.SECONDS));
     }
 
-    // ------------------------------------------------------------------ RF02
-
     public SerieTemporalResponse seriePorPeriodo(FiltroChamados filtro, String agrupamento) {
         FiltroChamadosCriteria.validar(filtro);
         Agrupamento tipo = Agrupamento.de(agrupamento);
@@ -173,8 +164,6 @@ public class DashboardService {
         return new SerieTemporalResponse(tipo.nome, inicio, fim, totalAbertos, totalResolvidos, lista);
     }
 
-    // ------------------------------------------------------------------ RF03
-
     public List<ContagemStatusResponse> distribuicaoPorStatus(FiltroChamados filtro) {
         List<Document> grupos = agrupar(filtro, "$status", null);
         Map<String, Long> contagem = new LinkedHashMap<>();
@@ -193,8 +182,6 @@ public class DashboardService {
                         StatusChamado.de(e.getKey()).map(StatusChamado::isFinalizado).orElse(false)))
                 .toList();
     }
-
-    // ------------------------------------------------------------------ RF04
 
     public List<RankingItemResponse> rankingTipos(FiltroChamados filtro, int limite) {
         return ranking(filtro, "$tipo", limite);
@@ -221,7 +208,6 @@ public class DashboardService {
         List<Document> grupos = agrupar(filtro, campo, extras);
         long total = grupos.stream().mapToLong(g -> ((Number) g.get("total")).longValue()).sum();
 
-        // Mescla grupos que só diferem por espaços/caixa e trata valores ausentes.
         Map<String, long[]> mesclado = new LinkedHashMap<>();
         Map<String, double[]> tempos = new LinkedHashMap<>();
         for (Document g : grupos) {
@@ -256,8 +242,6 @@ public class DashboardService {
         return resultado;
     }
 
-    // ------------------------------------------------------------------ RF05
-
     public FiltrosDisponiveisResponse filtrosDisponiveis() {
         return new FiltrosDisponiveisResponse(
                 StatusChamado.rotulos(),
@@ -266,8 +250,6 @@ public class DashboardService {
                 distintos("tecnico"),
                 distintos("setor"));
     }
-
-    // ------------------------------------------------------------------ apoio
 
     private List<Document> agrupar(FiltroChamados filtro, String campo, Document acumuladoresExtras) {
         Document grupo = new Document("_id", campo).append("total", new Document("$sum", 1));
@@ -301,7 +283,6 @@ public class DashboardService {
         return Math.round(valor * 10.0) / 10.0;
     }
 
-    /** Agrupamentos aceitos pela série temporal. */
     enum Agrupamento {
         DIA("dia"), SEMANA("semana"), MES("mes");
 

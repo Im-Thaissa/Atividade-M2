@@ -5,10 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Situações possíveis de um chamado. O valor gravado no banco é o "rotulo",
- * mantendo compatibilidade com os registros antigos (ex.: "Aberto").
- */
 public enum StatusChamado {
 
     ABERTO("Aberto", false),
@@ -29,12 +25,10 @@ public enum StatusChamado {
         return rotulo;
     }
 
-    /** Indica se o chamado não exige mais ação da equipe (Resolvido ou Cancelado). */
     public boolean isFinalizado() {
         return finalizado;
     }
 
-    /** Rótulos dos status que ainda estão pendentes de atendimento. */
     public static List<String> rotulosPendentes() {
         return Arrays.stream(values()).filter(s -> !s.finalizado).map(StatusChamado::getRotulo).toList();
     }
@@ -43,10 +37,6 @@ public enum StatusChamado {
         return Arrays.stream(values()).map(StatusChamado::getRotulo).toList();
     }
 
-    /**
-     * Converte um texto livre em status, ignorando maiúsculas, acentos, espaços e "_".
-     * Aceita tanto o rótulo ("Em andamento") quanto o nome ("EM_ANDAMENTO").
-     */
     public static Optional<StatusChamado> de(String valor) {
         if (valor == null || valor.isBlank()) {
             return Optional.empty();
